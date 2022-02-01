@@ -1,7 +1,10 @@
 import logo from './logo.svg';
 import React from "react";
 import './App.css';
-import Title from "./components/Title";
+import Title from './components/Title';
+import MainCard from './components/MainCard';
+import Favorites from './components/Favorites';
+import Form from './components/Form';
 
 const jsonLocalStorage = {
   setItem: (key, value) => {
@@ -21,83 +24,71 @@ const fetchCat = async (text) => {
 
 console.log("야옹");
 
-function CatItem(props) {
-  return (
-    <li>
-      <img
-        src={props.img}
-        style={{ width: "150px" }}
-      />
-    </li>
-  );
-}
+// function CatItem(props) {
+//   return (
+//     <li>
+//       <img
+//         src={props.img}
+//         style={{ width: "150px" }}
+//       />
+//     </li>
+//   );
+// }
 
-function Favorites({ favorites }) {
-  if (favorites.length === 0) {
-    return (<div>사진 위 하트를 눌러 고양이 사진을 저장해봐요!</div>);
-  }
+// function Favorites({ favorites }) {
+//   if (favorites.length === 0) {
+//     return (<div>사진 위 하트를 눌러 고양이 사진을 저장해봐요!</div>);
+//   }
 
-  return (
-    <ul className="favorites">
-      {favorites.map((cat) => (
-        <CatItem img={cat} key={cat} />
-      ))}
-    </ul>
-  );
-}
-
-const MainCard = ({ img, onHeartClick, alreadyFavorite }) => {
-  const heartIcon = alreadyFavorite ? "💖" : "🤍";
-
-  return (
-    <div className="main-card">
-      <img src={img} alt="고양이" width="400" />
-      <button onClick={onHeartClick}>{heartIcon}</button>
-    </div>
-  );
-};
+//   return (
+//     <ul className="favorites">
+//       {favorites.map((cat) => (
+//         <CatItem img={cat} key={cat} />
+//       ))}
+//     </ul>
+//   );
+// }
 
 
+// const Form = ({ updateMainCat }) => {
+//   const includesHangul = (text) => /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/i.test(text);
+//   const [value, setValue] = React.useState('');
+//   const [errorMessage, setErrorMessage] = React.useState('');
 
-const Form = ({ updateMainCat }) => {
-  const includesHangul = (text) => /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/i.test(text);
-  const [value, setValue] = React.useState('');
-  const [errorMessage, setErrorMessage] = React.useState('');
+//   function handleInputChange(e) {
+//     const userValue = e.target.value;
+//     console.log(includesHangul(userValue));
+//     setErrorMessage("");
+//     if (includesHangul(userValue)) {
+//       setErrorMessage("한글은 입력할 수 없습니다.");
+//     }
+//     setValue(userValue.toUpperCase());
+//   }
 
-  function handleInputChange(e) {
-    const userValue = e.target.value;
-    console.log(includesHangul(userValue));
-    setErrorMessage("");
-    if (includesHangul(userValue)) {
-      setErrorMessage("한글은 입력할 수 없습니다.");
-    }
-    setValue(userValue.toUpperCase());
-  }
+//   function handleFormSubmit(e) {
+//     e.preventDefault();
+//     setErrorMessage("");
+//     if (value === '') {
+//       setErrorMessage("빈 값으로 만들 수 없습니다.");
+//       return;
+//     }
+//     updateMainCat(value);
+//   }
 
-  function handleFormSubmit(e) {
-    e.preventDefault();
-    setErrorMessage("");
-    if (value === '') {
-      setErrorMessage("빈 값으로 만들 수 없습니다.");
-      return;
-    }
-    updateMainCat(value);
-  }
-
-  return (
-    <form onSubmit={handleFormSubmit}>
-      <input
-        type="text"
-        name="name"
-        placeholder="영어 대사를 입력해주세요"
-        value={value}
-        onChange={handleInputChange}
-      />
-      <button type="submit">생성</button>
-      <p style={{ color: 'red' }}>{errorMessage}</p>
-    </form>
-  );
-};
+//   return (
+//     <form onSubmit={handleFormSubmit}>
+//       <input
+//         type="text"
+//         name="name"
+//         placeholder="영어 대사를 입력해주세요"
+//         value={value}
+//         onChange={handleInputChange}
+//       />
+//       <button type="submit">생성</button>
+//       <p style={{ color: 'red' }}>{errorMessage}</p>
+//     </form>
+//   );
+// };
 
 
 const App = () => {
